@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-$v$x!w^w%44(ei_v)b^q@*0@3l8j-m!%i7*krw&#lme^9540^k'
+SECRET_KEY = 'django-insecure-mau-^qz@aqv(i_nl0x^sgphc0$(=^@ia7sw*eeyi9&87u4&*2f'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'playground',
+    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
@@ -47,6 +49,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
+]
+
+INTERNAL_IPS = [
+    '127.0.0.1',
 ]
 
 ROOT_URLCONF = 'skillstream.urls'
