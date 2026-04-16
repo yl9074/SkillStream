@@ -1,6 +1,6 @@
 # === Virtual Environment ===
 # Do not upload the virtual environment. Every developer must build their own locally using 'pipenv install'.
-.venv/
+venv/
 Pipfile.lock
 
 # === Python Cache ===

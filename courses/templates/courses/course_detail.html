@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ course.title }} - SkillStream</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 40px; background-color: #f4f4f9; }
+        .container { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .lesson-box { background: #e8f4f8; padding: 10px 20px; margin: 10px 0; border-left: 5px solid #3498db; }
+        a { text-decoration: none; color: #3498db; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <a href="/courses/">⬅️ Back to All Courses</a>
+        
+        <h1>{{ course.title }}</h1>
+        <p><strong>Instructor:</strong> {{ course.instructor.username }}</p>
+        <p>{{ course.description }}</p>
+        
+        <hr>
+        <h3>Course Lessons:</h3>
+        
+        {% for lesson in lessons %}
+            <div class="lesson-box">
+                <h4>Lesson {{ lesson.order }}: {{ lesson.title }}</h4>
+                {% if lesson.video_url %}
+                    <a href="{{ lesson.video_url }}" target="_blank">▶️ Watch Video</a>
+                {% endif %}
+            </div>
+        {% empty %}
+            <p>The instructor hasn't uploaded any lessons yet.</p>
+        {% endfor %}
+    </div>
+
+</body>
+</html>

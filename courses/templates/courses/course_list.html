@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SkillStream - Course List</title>
+    <style>
+        /* 这里随便写了一点点美化代码，让它别太丑 */
+        body { font-family: Arial, sans-serif; padding: 40px; background-color: #f4f4f9; }
+        .course-card { background: white; padding: 20px; margin-bottom: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .course-title { color: #2c3e50; margin-top: 0; }
+        .instructor { color: #7f8c8d; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+
+    <h1>Welcome to SkillStream 🚀</h1>
+    <p>Discover our latest published courses below:</p>
+    <hr>
+
+    {% for course in courses %}
+        <div class="course-card">
+            <h2><a href="/courses/{{ course.id }}/">{{ course.title }}</a></h2>
+            <p class="instructor">Instructor: {{ course.instructor.username }}</p>
+            <p>{{ course.description }}</p>
+        </div>
+    
+    {% empty %}
+        <p>No courses published yet. Check back later!</p>
+    {% endfor %}
+
+</body>
+</html>
