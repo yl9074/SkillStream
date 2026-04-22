@@ -1,7 +1,9 @@
 from django.contrib import admin
-from .models import Category, Course, Lesson
+from .models import Subject, Pathway, VideoLesson, Quiz, Question
 
 # Register your models here.
-admin.site.register(Category)
-admin.site.register(Course)
-admin.site.register(Lesson)
+admin.site.register(Subject)
+admin.site.register(Pathway)
+admin.site.register(VideoLesson)
+admin.site.register(Quiz)
+admin.site.register(Question)

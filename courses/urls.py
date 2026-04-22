@@ -3,7 +3,9 @@ from . import views # Import the views from the current folder
 
 # The URL patterns for the courses app
 urlpatterns = [
-    # When a user visits the root of this app, trigger the course_list view
-    path('', views.course_list, name='course_list'), 
-    path('<int:course_id>/', views.course_detail, name='course_detail'),
+    # The URL path remains the same, but it now points to the updated pathway_list view
+    path('', views.pathway_list, name='pathway_list'), 
+    
+    # The expected parameter is now pathway_id, pointing to the pathway_detail view
+    path('<int:pathway_id>/', views.pathway_detail, name='pathway_detail'),
 ]
