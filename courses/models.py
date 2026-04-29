@@ -25,6 +25,13 @@ class VideoLesson(models.Model):
 
     def __str__(self):
         return f"Video {self.sequence_order} in {self.pathway.title}"
+    
+    def get_embed_url(self):
+        """Automatically convert standard YouTube URLs to embeddable iframe URLs."""
+        if "watch?v=" in self.youtube_url:
+            # Replace 'watch?v=' with 'embed/' for iframe compatibility
+            return self.youtube_url.replace("watch?v=", "embed/")
+        return self.youtube_url
 
 # 4. Quiz (An assessment linked to a specific pathway)
 class Quiz(models.Model):
