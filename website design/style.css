@@ -2,38 +2,64 @@
     width: 300px;
     margin: 100px auto;
     padding: 30px;
-    background: linear-gradient(to bottom, #00FFA1, #00FFD4);
+    background-image: linear-gradient(135deg, #96deda 10%, #50c9c3 100%);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+    border-radius: 15px;
     text-align: center;
 }
 
 .sign-up-box h2 {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
     color: black;
     font-family: Iosevka Charon, monospace;
     font-size: 32px;
+    font-weight: lighter;
 }
 
 .sign-up-box input {
     width: 100%;
     padding: 10px;
-    margin: 15px auto;
+    margin: 25px auto;
     border: 1px solid #546D5E;
     border-radius: 5px;
     font-size: 16px;
     font-family: Iosevka Charon, monospace;
-    text-align: center;
     display: block;
     box-sizing: border-box;
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    margin-top: 25px;
+}
+
+.input-group .user-icon {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+}
+
+.input-group .lock-icon {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+}
+
+.input-group input {
+    flex: 1;
+    margin: 0;
+    text-align: left;
 }
 
 .sign-up-box button {
     width: 100%;
     padding: 10px;
-    margin-top: 10px;
-    background-color: #546D5E;
+    margin-top: 5px;
+    background-color: #3f5649;
     color: white;
     border: none;
     border-radius: 5px;
@@ -42,7 +68,39 @@
     font-family: Istok Web, sans-serif;
 }
 
+#loginButton {
+    margin-top: 25px;
+}
+
 body {
-    background: url(Background_signup.png) no-repeat center center fixed;
+    background: url(images/Background_signup.png) no-repeat center center fixed;
     background-size: cover;
+}
+
+.sign-up-box p {
+    margin-top: 10px;
+    color: black;
+    font-family: Istok Web, sans-serif;
+    font-size: 14px;
+}
+
+.sign-up-box p a {
+    color: #006ac7;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.sign-up-box p a:hover {
+    text-decoration: underline;
+}
+
+.sign-up-box button:hover {
+    background-color: #4c615d;
+}
+
+#errorMessage {
+    color: red;
+    font-size: 20px;
+    margin-top: 15px;
+    font-family: Istok Web, sans-serif;
 }
