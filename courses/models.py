@@ -27,11 +27,29 @@ class VideoLesson(models.Model):
         return f"Video {self.sequence_order} in {self.pathway.title}"
     
     def get_embed_url(self):
-        """Automatically convert standard YouTube URLs to embeddable iframe URLs."""
-        if "watch?v=" in self.youtube_url:
-            # Replace 'watch?v=' with 'embed/' for iframe compatibility
-            return self.youtube_url.replace("watch?v=", "embed/")
-        return self.youtube_url
+        """Automatically convert various YouTube URLs to embeddable iframe URLs."""
+        # 1. Clean up any leading/trailing whitespace or newlines
+        url = self.youtube_url.strip()
+        
+        # 🛑 Defensive handling: Case 3 - If the user pasted the entire raw <iframe> HTML
+        if "<iframe" in url and 'src="' in url:
+            # Extract exactly the URL: split by 'src="' to get the second half, 
+            # then split by the closing '"' to grab the first part.
+            extracted_url = url.split('src="')[1].split('"')[0]
+            return extracted_url
+            
+        # Case 1: Standard long YouTube URL (contains watch?v=)
+        if "watch?v=" in url:
+            video_id = url.split("watch?v=")[1].split("&")[0]
+            return f"https://www.youtube.com/embed/{video_id}"
+            
+        # Case 2: Shortened share URL (contains youtu.be/)
+        elif "youtu.be/" in url:
+            video_id = url.split("youtu.be/")[1].split("?")[0]
+            return f"https://www.youtube.com/embed/{video_id}"
+            
+        # Case 4: Already a valid embed URL (or unrecognized format), return as-is
+        return url
 
 # 4. Quiz (An assessment linked to a specific pathway)
 class Quiz(models.Model):
