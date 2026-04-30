@@ -71,3 +71,29 @@ class Question(models.Model):
 
     def __str__(self):
         return self.question_text
+    
+class UserProgress(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    video = models.ForeignKey(VideoLesson, on_delete=models.CASCADE)
+    is_completed = models.BooleanField(default=False)
+    completion_date = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+
+    class Meta:
+        # A user can only have one progress record per video
+        unique_together = ('user', 'video')
+
+    def __str__(self):
+        return f"{self.user.username} - {self.video.title} - {'Done' if self.is_completed else 'Pending'}"
+    
+class QuizScore(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    pathway = models.ForeignKey(Pathway, on_delete=models.CASCADE)
+    score = models.DecimalField(max_digits=5, decimal_places=2) # Example: 85.50
+    date_taken = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        # A user can take a quiz multiple times
+        ordering = ['-date_taken'] 
+
+    def __str__(self):
+        return f"{self.user.username} - {self.pathway.title} - {self.score}%"
