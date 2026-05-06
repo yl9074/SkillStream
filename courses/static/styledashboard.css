@@ -9,7 +9,7 @@
     display: flex;
     align-items: center;
     gap: 50px;
-    margin-left: 400px;
+    margin-left: 550px;
 }
 
 .dashboard-hrefs a {
@@ -19,7 +19,7 @@
 }
 
 .dashboard-hrefs a:hover {
-    background-color: #f0f0f0;
+    background-color: #c4c4c4;
     padding: 20px 0px;
 }
 
@@ -29,3 +29,28 @@
     cursor: pointer;
 }
 
+.dashboard-container {
+    text-align: center;
+    margin-top: 100px;
+    font-family: Istok Web, sans-serif;
+}
+
+.dashboard-container h1 {
+    font-size: 44px;
+    margin: 70px;
+}
+
+.dashboard-container h2 {
+    color: rgb(116, 18, 209);
+    margin: 8px;
+}
+
+.dashboard-container h4 {
+    font-weight: lighter;
+    margin: auto;
+}
+
+.dashboard-opinions {
+    margin: auto;
+    text-align: center;
+}
