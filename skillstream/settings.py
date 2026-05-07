@@ -126,3 +126,4 @@ STATIC_URL = 'static/'
 # Authentication Redirects
 LOGIN_REDIRECT_URL = 'catalog'
 LOGOUT_REDIRECT_URL = 'login'
+LOGIN_URL = 'login'

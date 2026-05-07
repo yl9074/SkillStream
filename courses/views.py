@@ -1,14 +1,17 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
-from .models import Subject, Pathway, VideoLesson # 👈 Import the new models here
+from django.contrib.auth.decorators import login_required
+from .models import Subject, Pathway, VideoLesson, UserProgress # import the new models here
 
 # 1. Lobby: Display all available learning pathways
+@login_required
 def pathway_list(request):
     pathways = Pathway.objects.all()
     return render(request, 'courses/pathway_list.html', {'pathways': pathways})
 
 # 2. Detail Page: Display all video lessons within a specific pathway
+@login_required
 def pathway_detail(request, pathway_id):
     pathway = get_object_or_404(Pathway, id=pathway_id)
     # Retrieve all videos under this pathway, ordered by their sequence number
@@ -35,5 +38,6 @@ def register(request):
         form = UserCreationForm()
     return render(request, 'register.html', {'form': form})
 
+@login_required
 def dashboard_view(request):
     return render(request, 'dashboard.html')
