@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head><title>Learning Pathways</title></head>
+<body style="font-family: Arial, sans-serif; padding: 20px;">
+    <h1>Available Learning Pathways</h1>
+    <hr>
+    <ul>
+        {% for pathway in pathways %}
+            <li style="margin-bottom: 10px;">
+                <a href="{% url 'pathway_detail' pathway.id %}" style="font-size: 18px; text-decoration: none; color: blue;">
+                    📚 {{ pathway.title }}
+                </a>
+            </li>
+        {% empty %}
+            <p>No pathways available.</p>
+        {% endfor %}
+    </ul>
+</body>
+</html>

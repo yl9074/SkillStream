@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User # Import Django's built-in User model
+from django.core.validators import RegexValidator
 
 # 1. Subject (The main category/discipline)
 class Subject(models.Model):
@@ -20,7 +21,16 @@ class Pathway(models.Model):
 # 3. Video Lesson (Individual video modules in a pathway)
 class VideoLesson(models.Model):
     pathway = models.ForeignKey(Pathway, on_delete=models.CASCADE, related_name='videos')
-    youtube_url = models.CharField(max_length=500)
+    youtube_url = models.CharField(
+        max_length=500,
+        validators=[
+            RegexValidator(
+                regex=r'(youtube\.com|youtu\.be|<iframe)', 
+                message="Error: Only YouTube links or iframe codes are allowed!"
+            )
+        ],
+        help_text="Paste the YouTube video link or iframe code here."
+    )
     sequence_order = models.IntegerField()
 
     def __str__(self):
@@ -31,7 +41,7 @@ class VideoLesson(models.Model):
         # 1. Clean up any leading/trailing whitespace or newlines
         url = self.youtube_url.strip()
         
-        # 🛑 Defensive handling: Case 3 - If the user pasted the entire raw <iframe> HTML
+        # Defensive handling: Case 3 - If the user pasted the entire raw <iframe> HTML
         if "<iframe" in url and 'src="' in url:
             # Extract exactly the URL: split by 'src="' to get the second half, 
             # then split by the closing '"' to grab the first part.
