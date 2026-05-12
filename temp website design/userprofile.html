@@ -2,58 +2,64 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Profile</title>
-    <link rel="stylesheet" href="styledashboard.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+    <link rel="stylesheet" href="styleprofile.css">
 </head>
 <body>
-    <header>
-        <div class="profile-header">
+
+    <div class="container">
+    
+        <header class="header">
+            <button class="back-button">Back</button>
             <h1>Profile</h1>
-        </div>
-    </header>
-    <main>
-        <div class="back">
-            <p><a href="dashboard.html">Back</a></p>
-        </div>
-        <div class="profile-card">
-            <div class="profile-top">
-                <img src="Profile.png">
-                <button class="button">Change profile</button>
+        </header>
+
+        <div class="card profile-card">
+            <div class="profile-header">
+                <div class="avatar">
+                    <img src="Profile.png" alt="Profile Avatar">
+                </div>
+                <button class="change-profile-button">Change profile</button>
             </div>
             <div class="profile-info">
-                <p>(Username)</p>
-                <p>Student/Admin</p>
+                <p class="username">(Username)</p>
+                <p class="role">Student/Admin</p>
             </div>
         </div>
-        <div class="card metrics">
-            <h3>Overall Learning Metrics</h3>
+
+        <div class="card metrics-card">
+            <h2>Overall Learning Metrics</h2>
             
-            <h4>Course 1</h4>
-            <div class="progress">
+            <div class="metric-row">
+                <span class="course-label">Course 1</span>
                 <div class="progress-bar">
-                    <p>0%</p>
-                </div>
-            </div>
-            <h4>Course 2</h4>
-            <div class="progress">
-                <div class="progress-bar">
-                    <p>0%</p>
-                </div>
-            </div>
-            <h4>Course 3</h4>
-            <div class="progress">
-                <div class="progress-bar">
-                    <p>0%</p>
-                </div>
-            </div>
-            <h4>Course 4</h4>
-            <div class="progress">
-                <div class="progress-bar">
-                    <p>0%</p>
+                    <div class="progress">75%</div>
                 </div>
             </div>
 
+            <div class="metric-row">
+                <span class="course-label">Course 2</span>
+                <div class="progress-bar">
+                    <div class="progress">80%</div>
+                </div>
+            </div>
+
+            <div class="metric-row">
+                <span class="course-label">Course 3</span>
+                <div class="progress-bar">
+                    <div class="progress">60%</div>
+                </div>
+            </div>
+
+            <div class="metric-row">
+                <span class="course-label">Course 4</span>
+                <div class="progress-bar">
+                    <div class="progress">90%</div>
+                </div>
+            </div>
         </div>
-    </main>
+    </div>
+
 </body>
 </html>
