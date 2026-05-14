@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ quiz.title }} - SkillStream</title>
+</head>
+<body style="font-family: Arial, sans-serif; padding: 40px; background-color: #faf7f2;">
+    <div style="background: white; padding: 40px; border-radius: 15px; max-width: 800px; margin: auto; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+        <h1 style="color: #1f36bc; margin-top: 0;">{{ quiz.title }}</h1>
+        <p style="color: gray;">Pathway: {{ quiz.pathway.title }}</p>
+        <hr style="margin-bottom: 30px;">
+        
+        <form method="POST">
+            {% csrf_token %}
+            
+            {% for question in questions %}
+                <div style="margin-bottom: 30px; padding: 15px; background-color: #f9f9f9; border-radius: 8px;">
+                    <h3 style="margin-top: 0;">{{ forloop.counter }}. {{ question.question_text }}</h3>
+                    
+                    {% if question.option_a %}
+                        <label style="display: block; margin: 8px 0; cursor: pointer;">
+                            <input type="radio" name="question_{{ question.id }}" value="{{ question.option_a }}" required> 
+                            {{ question.option_a }}
+                        </label>
+                    {% endif %}
+                    
+                    {% if question.option_b %}
+                        <label style="display: block; margin: 8px 0; cursor: pointer;">
+                            <input type="radio" name="question_{{ question.id }}" value="{{ question.option_b }}" required> 
+                            {{ question.option_b }}
+                        </label>
+                    {% endif %}
+                    
+                    {% if question.option_c %}
+                        <label style="display: block; margin: 8px 0; cursor: pointer;">
+                            <input type="radio" name="question_{{ question.id }}" value="{{ question.option_c }}" required> 
+                            {{ question.option_c }}
+                        </label>
+                    {% endif %}
+                    
+                    {% if question.option_d %}
+                        <label style="display: block; margin: 8px 0; cursor: pointer;">
+                            <input type="radio" name="question_{{ question.id }}" value="{{ question.option_d }}" required> 
+                            {{ question.option_d }}
+                        </label>
+                    {% endif %}
+                </div>
+            {% empty %}
+                <p>This quiz doesn't have any questions yet! Tell the Admin to add some.</p>
+            {% endfor %}
+            
+            <button type="submit" style="background-color: #3f5649; color: white; padding: 12px 25px; border: none; border-radius: 5px; font-size: 18px; cursor: pointer; width: 100%;">Submit Answers</button>
+        </form>
+    </div>
+</body>
+</html>
