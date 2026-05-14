@@ -93,7 +93,7 @@ class UserProgress(models.Model):
         unique_together = ('user', 'video')
 
     def __str__(self):
-        return f"{self.user.username} - {self.video.title} - {'Done' if self.is_completed else 'Pending'}"
+        return f"{self.user.username} - {self.video} - {'Done' if self.is_completed else 'Pending'}"
     
 class QuizScore(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
