@@ -70,3 +70,20 @@ def take_quiz(request, quiz_id):
         return redirect('dashboard')
 
     return render(request, 'courses/take_quiz.html', {'quiz': quiz, 'questions': questions})
+
+@login_required
+def search_courses(request):
+    
+    query = request.GET.get('q', '')
+    
+    if query:
+        results = Pathway.objects.filter(title__icontains=query)
+    else:
+        results = Pathway.objects.none()
+        
+    context = {
+        'results': results,
+        'query': query
+    }
+    
+    return render(request, 'courses/search_results.html', context)
