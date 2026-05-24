@@ -1,0 +1,45 @@
+{% extends "admin/index.html" %}
+{% load dashboard_tags %}
+
+{% block content %}
+<div style="width: 100%; margin-bottom: 30px; background: #262a30; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+    <h2 style="color: #fff; margin-top: 0;">Platform Analytics</h2>
+    <div style="width: 300px; height: 300px; margin: 0 auto;">
+        <canvas id="quizChart"></canvas>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const ctx = document.getElementById('quizChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'doughnut', 
+            data: {
+                labels: ['Mastered', 'Needs Review', 'In Progress'],
+                datasets: [{
+                    label: 'Number of Students',
+                    data: {% get_chart_data %},  
+                    backgroundColor: [
+                        '#4CAF50', 
+                        '#FF9800', 
+                        '#2196F3'  
+                    ],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: { color: '#fff' } 
+                    }
+                }
+            }
+        });
+    });
+</script>
+
+{{ block.super }}
+{% endblock %}
