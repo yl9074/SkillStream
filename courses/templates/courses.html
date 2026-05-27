@@ -1,22 +1,23 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Courses</title>
-    <link rel="stylesheet" href="stylecourses.css">
+    <link rel="stylesheet" href="{% static 'stylecourses.css' %}">
 </head>
 <body>
     <header class="header">
-        <a href="dashboard.html"><button class="back-button">Back</button></a>
+        <a href="{% url 'dashboard' %}"><button class="back-button">Back</button></a>
     </header>
     <div class="dashboard-wrapper">
         <h1 class="section-title">Choose Your Desired Course</h1>
         <div class="course-grid">
 
-            <a href="courses.html" class="course-card">
+            <a href="{% url 'courses' %}" class="course-card">
                 <div class="card-banner">
-                    <img src="courses images/Business Management.png" alt="Business Management image">
+                    <img src="{% static 'images/Business Management.png' %}" alt="Business Management image">
                 </div>
                 <div class="card-body">
                     <div class="provider-info">
@@ -26,9 +27,9 @@
                 </div>
             </a>
 
-            <a href="courses.html" class="course-card">
+            <a href="{% url 'courses' %}" class="course-card">
                 <div class="card-banner">
-                    <img src="courses images/HTML & CSS.png" alt="HTML & CSS for beginners image">
+                    <img src="{% static 'images/HTML & CSS.png' %}" alt="HTML & CSS for beginners image">
                 </div>
                 <div class="card-body">
                     <div class="provider-info">
@@ -38,9 +39,9 @@
                 </div>
             </a>
 
-            <a href="courses.html" class="course-card">
+            <a href="{% url 'courses' %}" class="course-card">
                 <div class="card-banner">
-                    <img src="courses images/Financial Analysis.png" alt="Finance Analysis image">
+                    <img src="{% static 'images/Financial Analysis.png' %}" alt="Finance Analysis image">
                 </div>
                 <div class="card-body">
                     <div class="provider-info">
@@ -50,9 +51,9 @@
                 </div>
             </a>
 
-            <a href="courses.html" class="course-card">
+            <a href="{% url 'courses' %}" class="course-card">
                 <div class="card-banner">
-                    <img src="courses images/Accounting Fundamentals.png" alt="Accounting Fundamentals image">
+                    <img src="{% static 'images/Accounting Fundamentals.png' %}" alt="Accounting Fundamentals image">
                 </div>
                 <div class="card-body">
                     <div class="provider-info">

@@ -14,11 +14,11 @@
             <h2>SkillStream</h2>
         </div>
         <div class="dashboard-hrefs">
-            <a href="#">Home</a>
-            <a href="#">Courses</a>
-            <a href="feedback.html">Feedback</a>
+            <a href="{% url 'home' %}">Home</a>
+            <a href="{% url 'courses' %}">Courses</a>
+            <a href="{% url 'feedback' %}">Feedback</a>
         </div>
-            <a href="userprofile.html"><img src="{% static 'images/Profile.png' %}" class="profile" alt="Profile Icon"></a>
+            <a href="{% url 'profile' %}"><img src="{% static 'images/Profile.png' %}" class="profile" alt="Profile Icon"></a>
         </nav>
     </header>
     <main>

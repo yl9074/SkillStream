@@ -1,15 +1,16 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Feedback Form</title>
-    <link rel="stylesheet" href="stylefeedback.css">
+    <link rel="stylesheet" href="{% static 'stylefeedback.css' %}">
 </head>
 <body>
 
     <header class="header">
-        <a href="dashboard.html"><button class="back-button">Back</button></a>
+        <a href="{% url 'dashboard' %}"><button class="back-button">Back</button></a>
         <h1>Feedback</h1>
     </header>
 
@@ -23,10 +24,10 @@
             <input type="text" name="name" placeholder="Your Name" class="contact-inputs" required>
             <input type="email" name="email" placeholder="Your Email" class="contact-inputs" required>
             <textarea name="message" placeholder="Your Message" class="contact-inputs" required></textarea>
-            <button type="submit">Submit <img src="feedback form images/arrow_icon.png" alt="arrow icon"></button>
+            <button type="submit">Submit <img src="{% static 'images/arrow_icon.png' %}" alt="arrow icon"></button>
         </form>
         <div class="contact-right">
-            <img src="feedback form images/right_img.png" alt="Contact Image">
+            <img src="{% static 'images/right_img.png' %}" alt="Contact Image">
         </div>
     </div>
 </body>

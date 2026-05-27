@@ -87,3 +87,12 @@ def search_courses(request):
     }
     
     return render(request, 'courses/search_results.html', context)
+
+def user_profile(request):
+    return render(request, 'profile.html')
+
+def feedback(request):
+    return render(request, 'feedback.html')
+
+def courses(request):
+    return render(request, 'courses.html')
