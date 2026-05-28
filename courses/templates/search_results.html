@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results - SkillStream</title>
+    <link rel="stylesheet" href="{% static 'styleresults.css' %}">
+</head>
+<body>
+
+    <header class="header">
+        <a href="{% url 'courses' %}"><button class="back-button">Back to All Courses</button></a>
+    </header>
+
+    <div class="dashboard-wrapper">
+        
+        <div class="search-meta-header">
+            <h1 class="section-title">Search Results</h1>
+            <p class="search-query-text">
+                Showing results for: <span class="highlight-keyword">"{{ query }}"</span>
+            </p>
+        </div>
+
+        {% if results %}
+            <div class="course-grid">
+                {% for course in results %}
+                    <a href="{% url 'pathway_detail' course.id %}" class="course-card">
+                        <div class="card-banner">
+                            {% if course.image %}
+                                <img src="{{ course.image.url }}" alt="{{ course.title }} image">
+                            {% else %}
+                                <img src="{% static 'images/HTML & CSS.png' %}" alt="Default course image">
+                            {% endif %}
+                        </div>
+                        <div class="card-body">
+                            <div class="provider-info">
+                                <span class="course-genre">{{ course.genre }}</span>
+                            </div>
+                            <h3 class="course-name">{{ course.title }}</h3>
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="empty-results-box">
+                <div class="empty-icon">🔍</div>
+                <h2>No courses found</h2>
+                <p>We couldn't find anything matching your search. Try double-checking your spelling or searching for a broader category like "Finance" or "Design".</p>
+                <a href="{% url 'courses' %}" class="clear-search-btn">Browse All Courses</a>
+            </div>
+        {% endif %}
+
+    </div>
+
+</body>
+</html>

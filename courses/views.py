@@ -88,12 +88,15 @@ def search_courses(request):
     
     return render(request, 'courses/search_results.html', context)
 
+@login_required
 def user_profile(request):
     return render(request, 'profile.html')
 
+@login_required
 def feedback(request):
     return render(request, 'feedback.html')
 
+@login_required
 def courses(request):
     pathways = Pathway.objects.all()
     return render(request, 'courses.html', {'pathways': pathways})
