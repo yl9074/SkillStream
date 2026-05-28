@@ -13,6 +13,14 @@
     </header>
     <div class="dashboard-wrapper">
         <h1 class="section-title">Choose Your Desired Course</h1>
+
+        <form method="GET" action="{% url 'search' %}" class="search-form-container">
+            <div class="search-input-wrapper">
+                <input type="text" name="q" placeholder="Search for Courses" required>
+                <button type="submit" class="search-submit-button">Search</button>
+            </div>
+        </form>
+
         <div class="course-grid">
             {% for pathway in pathways %}
             <a href="{% url 'pathway_detail' pathway.id %}" class="course-card">

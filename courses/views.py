@@ -103,9 +103,11 @@ def user_profile(request):
     
     return render(request, 'profile.html', context)
 
+@login_required
 def feedback(request):
     return render(request, 'feedback.html')
 
+@login_required
 def courses(request):
     pathways = Pathway.objects.all()
     return render(request, 'courses.html', {'pathways': pathways})

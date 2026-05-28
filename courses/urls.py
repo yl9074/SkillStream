@@ -7,9 +7,6 @@ urlpatterns = [
     # The URL path remains the same, but it now points to the updated pathway_list view
     path('', views.pathway_list, name='pathway_list'), 
     
-    # The expected parameter is now pathway_id, pointing to the pathway_detail view
-    path('<int:pathway_id>/', views.pathway_detail, name='pathway_detail'),
-
     path('catalog/', views.subject_catalog, name='catalog'),
     path('register/', views.register, name='register'),
     path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
@@ -20,4 +17,7 @@ urlpatterns = [
     path('profile/', views.user_profile, name='user_profile'),
     path('feedback/', views.feedback, name='feedback'),
     path('courses/', views.courses, name='courses'),
+
+    # The expected parameter is now pathway_id, pointing to the pathway_detail view
+    path('<int:pathway_id>/', views.pathway_detail, name='pathway_detail'),
 ]

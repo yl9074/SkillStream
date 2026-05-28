@@ -1,0 +1,62 @@
+/* Search Feedback Typography */
+.search-meta-header {
+    margin-bottom: 30px;
+}
+
+.search-query-text {
+    font-size: 1.1rem;
+    color: #64748b;
+    margin-top: -15px; /* Pulls it closer to the h1 heading */
+}
+
+.highlight-keyword {
+    color: #1f36bc; /* Matches your core brand text accent */
+    font-weight: 600;
+}
+
+/* Empty State Styling Box */
+.empty-results-box {
+    text-align: center;
+    background-color: #ffffff;
+    padding: 60px 40px;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    max-width: 550px;
+    margin: 40px auto 0 auto;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.empty-icon {
+    font-size: 3.5rem;
+    margin-bottom: 16px;
+}
+
+.empty-results-box h2 {
+    font-size: 1.5rem;
+    color: #0f172a;
+    margin: 0 0 10px 0;
+}
+
+.empty-results-box p {
+    color: #64748b;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 24px;
+}
+
+/* Clear Filter CTA Button style link */
+.clear-search-btn {
+    display: inline-block;
+    background-color: #1f36bc;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: background-color 0.15s ease;
+}
+
+.clear-search-btn:hover {
+    background-color: #162894;
+}
