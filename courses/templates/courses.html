@@ -22,6 +22,26 @@
         </form>
 
         <div class="course-grid">
+            {% for pathway in pathways %}
+            <a href="{% url 'pathway_detail' pathway.id %}" class="course-card">
+                
+                <div class="card-banner">
+                    <img src="{% static 'images/Book.png' %}" alt="Course thumbnail">
+                </div>
+                
+                <div class="card-body">
+                    <div class="provider-info">
+                        <span class="course-genre">{{ pathway.subject.title }}</span>
+                    </div>
+                    <h3 class="course-name">{{ pathway.title }}</h3>
+                </div>
+            </a>
+            
+            {% empty %}
+                <p style="grid-column: 1 / -1; text-align: center; color: gray;">
+                    No courses available right now. Tell the admin to add some!
+                </p>
+            {% endfor %}
 
             <a href="{% url 'courses' %}" class="course-card">
                 <div class="card-banner">

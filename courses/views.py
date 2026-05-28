@@ -99,5 +99,4 @@ def feedback(request):
 @login_required
 def courses(request):
     pathways = Pathway.objects.all()
-
     return render(request, 'courses.html', {'pathways': pathways})
