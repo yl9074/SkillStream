@@ -26,43 +26,38 @@
             </div>
             <div class="profile-info">
                 <h2>{{ request.user.username }}</h2>
-                <p class="role">Student/Admin</p>
+                <p class="role">
+                 {% if request.user.is_superuser %}
+                      Administrator
+                  {% else %}
+                       Student
+                   {% endif %}</p>
                 <p>User since: {{ request.user.date_joined|date:"F j, Y" }}</p>
             </div>
         </div>
 
         <div class="card metrics-card">
-            <h2>Overall Learning Metrics</h2>
-            
-            <div class="metric-row">
-                <span class="course-label">Course 1</span>
-                <div class="progress-bar">
-                    <div class="progress">75%</div>
-                </div>
-            </div>
-
-            <div class="metric-row">
-                <span class="course-label">Course 2</span>
-                <div class="progress-bar">
-                    <div class="progress">80%</div>
-                </div>
-            </div>
-
-            <div class="metric-row">
-                <span class="course-label">Course 3</span>
-                <div class="progress-bar">
-                    <div class="progress">60%</div>
-                </div>
-            </div>
-
-            <div class="metric-row">
-                <span class="course-label">Course 4</span>
-                <div class="progress-bar">
-                    <div class="progress">90%</div>
-                </div>
-            </div>
+    <h2>Overall Learning Metrics</h2>
+    
+    {% for progress in progress_list %}
+    <div class="metric-row">
+        <span class="course-label">{{ progress.video.pathway.title }} - Lesson {{ progress.video.sequence_order }}</span>
+        
+        <div class="progress-bar">
+            {% if progress.is_completed %}
+                <div class="progress" style="width: 100%; background-color: #4CAF50;">100%</div>
+            {% else %}
+                <div class="progress" style="width: 50%; background-color: #FF9800;">50%</div>
+            {% endif %}
         </div>
     </div>
+
+    {% empty %}
+    <div class="metric-row">
+        <p style="color: #aaa; margin-top: 10px;">You haven't started any courses yet. Go explore!</p>
+    </div>
+    {% endfor %}
+</div>
 
     <script>
 
