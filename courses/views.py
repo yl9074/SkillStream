@@ -95,4 +95,5 @@ def feedback(request):
     return render(request, 'feedback.html')
 
 def courses(request):
-    return render(request, 'courses.html')
+    pathways = Pathway.objects.all()
+    return render(request, 'courses.html', {'pathways': pathways})
