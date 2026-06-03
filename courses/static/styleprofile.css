@@ -14,7 +14,7 @@ body {
     box-sizing: border-box;
 }
 
-.header {
+.profile-wrapper {
     background-color: #dbdada;
     position: relative;
     padding: 15px;
@@ -22,7 +22,7 @@ body {
     margin-bottom: 50px;
 }
 
-.header h1 {
+.profile-wrapper h1 {
     margin: 0;
     font-size: 36px;
     font-weight: normal;
@@ -30,19 +30,19 @@ body {
 }
 
 .back-button {
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 100%;
-    padding: 0 40px;
-    background-color: #9eb4bd;
+    background-color: #e2e8f0;
     border: none;
-    font-size: 22px;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 14px;
     cursor: pointer;
+    transition: background-color 0.2s ease;
+    position: absolute;
+    left: 40px;
 }
 
 .back-button:hover {
-    background-color: #7f9092;
+    background-color: #cbd5e1;
 }
 
 .card {
@@ -133,4 +133,24 @@ body {
     font-size: 15px;
     width: 100%;
     font-family: Istok Web, sans-serif;
+}
+
+.logout-form {
+    margin-top: 20px;
+}
+
+.logout-button {
+    background-color: #d52d2d;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 24px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+}
+
+.logout-button:hover {
+    background-color: #be2121;
 }

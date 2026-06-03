@@ -97,10 +97,3 @@ body {
 .sign-up-box button:hover {
     background-color: #4c615d;
 }
-
-#errorMessage {
-    color: red;
-    font-size: 20px;
-    margin-top: 15px;
-    font-family: Istok Web, sans-serif;
-}

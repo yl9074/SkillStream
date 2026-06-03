@@ -41,6 +41,9 @@ def register(request):
             return redirect('dashboard')  # redirect to the dashboard after successful registration
     else:
         form = UserCreationForm()
+        form.fields['username'].widget.attrs.update({'placeholder': 'Username'})
+        form.fields['password1'].widget.attrs.update({'placeholder': 'Password'})
+        form.fields['password2'].widget.attrs.update({'placeholder': 'Confirm Password'})
     return render(request, 'register.html', {'form': form})
 
 @login_required
@@ -79,10 +82,11 @@ def take_quiz(request, quiz_id):
 @login_required
 def search_courses(request):
     
-    query = request.GET.get('q', '')
+    query = request.GET.get('q', '').strip()
     
     if query:
-        results = Pathway.objects.filter(title__icontains=query)
+        results = Pathway.objects.filter(title__icontains=query) | Pathway.objects.filter(subject__title__icontains=query)
+        results = results.distinct()
     else:
         results = Pathway.objects.none()
         

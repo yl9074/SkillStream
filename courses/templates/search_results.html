@@ -30,12 +30,12 @@
                             {% if course.image %}
                                 <img src="{{ course.image.url }}" alt="{{ course.title }} image">
                             {% else %}
-                                <img src="{% static 'images/HTML & CSS.png' %}" alt="Default course image">
+                                <img src="{% static 'images/Book.png' %}" alt="Default course image">
                             {% endif %}
                         </div>
                         <div class="card-body">
                             <div class="provider-info">
-                                <span class="course-genre">{{ course.genre }}</span>
+                                <span class="course-genre">{{ course.subject.title }}</span>
                             </div>
                             <h3 class="course-name">{{ course.title }}</h3>
                         </div>
@@ -46,8 +46,7 @@
             <div class="empty-results-box">
                 <div class="empty-icon">🔍</div>
                 <h2>No courses found</h2>
-                <p>We couldn't find anything matching your search. Try double-checking your spelling.</p>
-                <a href="{% url 'courses' %}" class="clear-search-btn">Browse All Courses</a>
+                <p>We couldn't find anything matching from your search. Try double checking your spelling.</p>
             </div>
         {% endif %}
 
