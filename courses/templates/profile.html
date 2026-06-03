@@ -8,13 +8,16 @@
     <link rel="stylesheet" href="{% static 'styleprofile.css' %}">
 </head>
 <body>
-
-    <div class="container">
     
+    <div class="container">
+        
         <header class="header">
             <a href="{% url 'dashboard' %}"><button class="back-button">Back</button></a>
-            <h1>Profile</h1>
         </header>
+
+        <div class="profile-wrapper">
+        <h1>Profile</h1>
+        </div>
 
         <div class="card profile-card">
             <div class="profile-header">
@@ -33,6 +36,10 @@
                        Student
                    {% endif %}</p>
                 <p>User since: {{ request.user.date_joined|date:"F j, Y" }}</p>
+                <form method="POST" action="{% url 'logout' %}" class="logout-form" id="logout-form">
+                    {% csrf_token %}
+                    <button type="button" class="logout-button" id="logout-button">Log Out</button>
+                </form>
             </div>
         </div>
 
@@ -64,6 +71,9 @@
     const uploadBtn = document.getElementById('upload-button');
     const fileInput = document.getElementById('file-input');
     const profileImg = document.getElementById('profile-image');
+    const logoutBtn = document.getElementById('logout-button');
+    const logoutForm = document.getElementById('logout-form');
+
 
     uploadBtn.addEventListener('click', function() {
         fileInput.click();
@@ -77,6 +87,14 @@
             
             profileImg.src = objectURL;
         }
+    });
+
+    logoutBtn.addEventListener('click', function() {
+    const userConfirmed = confirm("Are you sure you want to log out?");
+    
+    if (userConfirmed) {
+        logoutForm.submit();
+    }
     });
     </script>
 
