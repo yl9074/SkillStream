@@ -78,7 +78,13 @@ def take_quiz(request, quiz_id):
                 score=score_percentage
             )
         
-        return redirect('dashboard')
+        context = {
+                'quiz': quiz,
+                'score_percentage': round(score_percentage, 1), #rounds to 1 decimal 
+                'correct_answers': correct_answers,
+                'total_questions': total_questions
+            }
+        return render(request, 'courses/quiz_results.html', context)
 
     return render(request, 'courses/take_quiz.html', {'quiz': quiz, 'questions': questions})
 
