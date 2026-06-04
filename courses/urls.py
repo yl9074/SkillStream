@@ -19,4 +19,5 @@ urlpatterns = [
     path('courses/', views.courses, name='courses'),
     path('<int:pathway_id>/', views.pathway_detail, name='pathway_detail'),
     path('video/<int:video_id>/complete/', views.mark_video_complete, name='mark_video_complete'),
+    path('admin-analytics/', views.admin_analytics, name='admin_analytics'),
 ]

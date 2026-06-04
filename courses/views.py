@@ -2,6 +2,9 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from django.db.models import Avg, Count
+from django.contrib.auth.decorators import user_passes_test
 from .models import Subject, Pathway, VideoLesson, UserProgress, Quiz, Question, QuizScore # import the new models here
 
 # 1. Lobby: Display all available learning pathways
@@ -132,3 +135,27 @@ def mark_video_complete(request, video_id):
         # Redirect the user back to the current pathway detail page
         return redirect('pathway_detail', video.pathway.id)
 
+# Security check: Only allow users where is_staff is True
+@user_passes_test(lambda u: u.is_staff)
+def admin_analytics(request):
+    # 1. Total number of registered students (excluding admins)
+    total_students = User.objects.filter(is_staff=False).count()
+
+    # 2. Average quiz score across the entire platform
+    # The aggregate function returns a dictionary, so we extract the specific value
+    avg_score_data = QuizScore.objects.aggregate(Avg('score'))
+    average_score = avg_score_data['score__avg'] or 0  # Fallback to 0 if no quizzes taken yet
+
+    # 3. Top 5 Most Popular Videos (Count how many UserProgress records link to each video)
+    popular_videos = VideoLesson.objects.annotate(
+        view_count=Count('userprogress')
+    ).order_by('-view_count')[:5]
+
+    # Pack everything into the context
+    context = {
+        'total_students': total_students,
+        'average_score': round(average_score, 2), # Round to 2 decimal places
+        'popular_videos': popular_videos,
+    }
+
+    return render(request, 'admin/admin_analytics.html', context)
