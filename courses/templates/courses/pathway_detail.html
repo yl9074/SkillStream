@@ -24,6 +24,16 @@
                     referrerpolicy="strict-origin-when-cross-origin" 
                     allowfullscreen>
                 </iframe>
+
+                <div style="text-align: left; margin-top: 20px;">
+                    <form action="{% url 'mark_video_complete' video.id %}" method="POST">
+                        {% csrf_token %}
+                        <button type="submit" style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; font-weight: bold;">
+                             Mark as Complete
+                        </button>
+                    </form>
+                </div>
+
             </div>
         {% empty %}
             <p>No videos available for this pathway yet. Check back later!</p>
