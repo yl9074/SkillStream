@@ -45,6 +45,20 @@
                     </form>
                 </div>
 
+                <div style="margin-top: 40px; padding: 20px; text-align: center; background-color: #f8f9fa; border-radius: 10px;">
+                    <h3 style="margin-bottom: 15px;">Ready to test your knowledge?</h3>
+            
+                {% if pathway.quizzes.all %}
+                    {% for quiz in pathway.quizzes.all %}
+                        <a href="{% url 'take_quiz' quiz.id %}" style="background-color: #1f36bc; color: white; padding: 12px 25px; border-radius: 5px; text-decoration: none; font-size: 16px; font-weight: bold; display: inline-block; margin: 5px;">
+                            Continue to Quiz
+                        </a>
+                    {% endfor %}
+                {% else %}
+                    <p style="color: #6c757d; font-style: italic;">Assessment coming soon.</p>
+                {% endif %}
+                </div>
+
             </div>
         {% empty %}
             <p>No videos available for this pathway yet. Check back later!</p>

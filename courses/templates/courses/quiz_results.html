@@ -1,0 +1,43 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Results</title>
+
+    <link rel="stylesheet" href="{% static 'css/quiz_results.css' %}">
+</head>
+<body>
+
+    <div class="container">
+
+        <h1 class="title">Quiz Complete!</h1>
+
+        <p class="quiz-title">{{ quiz.title }}</p>
+
+        <hr class="divider">
+
+        <h2 class="{% if score_percentage >= 50 %}pass-score{% else %}fail-score{% endif %}">
+            {{ score_percentage }}%
+        </h2>
+
+        <p class="result-text">
+            You answered <strong>{{ correct_answers }}</strong> out of <strong>{{ total_questions }}</strong> questions correctly.
+        </p>
+
+        <div class="button-container">
+            <a href="{% url 'dashboard' %}" class="btn dashboard-btn">
+                Home
+            </a>
+
+            <a href="{% url 'take_quiz' quiz.id %}" class="btn retry-btn">
+                Retry Quiz
+            </a>
+        </div>
+
+    </div>
+
+</body>
+</html>
