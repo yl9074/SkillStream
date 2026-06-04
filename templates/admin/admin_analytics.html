@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Platform Analytics - SkillStream</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f7f6; padding: 40px; color: #333; }
+        .dashboard-container { max-width: 800px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        .stat-box { background: #4CAF50; color: white; padding: 20px; border-radius: 8px; text-align: center; margin-bottom: 20px; display: inline-block; width: 45%; margin-right: 2%; box-sizing: border-box;}
+        h1 { color: #2c3e50; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        ul { list-style-type: none; padding: 0; }
+        li { background: #eee; margin: 5px 0; padding: 15px; border-radius: 5px; font-size: 16px;}
+        .back-btn { display: inline-block; margin-top: 20px; padding: 10px 15px; background: #333; color: white; text-decoration: none; border-radius: 5px; transition: background 0.3s;}
+        .back-btn:hover { background: #555; }
+    </style>
+</head>
+<body>
+
+    <div class="dashboard-container">
+        <h1>SkillStream Admin Analytics</h1>
+        
+        <div>
+            <div class="stat-box">
+                <h3>Total Registered Students</h3>
+                <h2>{{ total_students }}</h2>
+            </div>
+            <div class="stat-box">
+                <h3>Average Platform Score</h3>
+                <h2>{{ average_score }}%</h2>
+            </div>
+        </div>
+
+        <h2>Top 5 Most Popular Videos</h2>
+        <ul>
+            {% for video in popular_videos %}
+                <li>
+                    <strong>{{ video.pathway.title }}</strong> - Video {{ video.sequence_order }}
+                    <span style="float: right; color: #d35400; font-weight: bold;">{{ video.view_count }} views</span>
+                </li>
+            {% empty %}
+                <li style="text-align: center; color: #7f8c8d;">No video watch records available yet.</li>
+            {% endfor %}
+        </ul>
+
+        <a href="{% url 'admin:index' %}" class="back-btn">Back to Admin Dashboard</a>
+    </div>
+
+</body>
+</html>
