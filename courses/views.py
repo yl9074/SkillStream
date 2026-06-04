@@ -116,3 +116,19 @@ def courses(request):
     pathways = Pathway.objects.all()
     return render(request, 'courses.html', {'pathways': pathways})
 
+@login_required
+def mark_video_complete(request, video_id):
+    if request.method == 'POST':
+        # Fetch the specific video lesson requested by the user
+        video = get_object_or_404(VideoLesson, id=video_id)
+        
+        # Retrieve the user's progress record, or create a new one if it doesn't exist
+        progress, created = UserProgress.objects.get_or_create(user=request.user, video=video)
+        
+        # Update the completion status to True
+        progress.is_completed = True
+        progress.save()
+        
+        # Redirect the user back to the current pathway detail page
+        return redirect('pathway_detail', video.pathway.id)
+

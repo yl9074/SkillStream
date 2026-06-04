@@ -8,7 +8,7 @@
         {% for pathway in pathways %}
             <li style="margin-bottom: 10px;">
                 <a href="{% url 'pathway_detail' pathway.id %}" style="font-size: 18px; text-decoration: none; color: blue;">
-                    📚 {{ pathway.title }}
+                     {{ pathway.title }}
                 </a>
             </li>
         {% empty %}
