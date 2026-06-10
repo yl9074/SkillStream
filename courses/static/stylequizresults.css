@@ -1,0 +1,138 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    background-image: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%); 
+    min-height: 580px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.container {
+    background-color: #ffffff;
+    padding: 50px;
+    border-radius: 16px;
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+}
+
+.title {
+    font-size: 32px;
+    font-weight: bold;
+    margin: 0 0 30px 0;
+    color: #0f172a;
+}
+
+.quiz-title {
+    font-size: 24px;
+    color: #9112db;
+    margin: 0 0 25px 0;
+    font-weight: 500;
+}
+
+.divider {
+    border: 0;
+    border-top: 1px solid #cbd5e1;
+    margin-bottom: 30px;
+}
+
+.score-display {
+    font-size: 48px;
+    font-weight: 700;
+    margin: 20px 0 30px 0;
+}
+
+.pass-score {
+    color: #18ab4d;
+}
+
+.fail-score {
+    color: #dc2626;
+}
+
+.feedback-message {
+    font-size: 18px;
+    font-weight: 600;
+    color: #334155;
+    margin-bottom: 20px;
+}
+
+.result-text {
+    font-size: 16px;
+    color: #64748b;
+    line-height: 1.5;
+    margin-bottom: 50px;
+}
+
+.result-text strong {
+    color: #0f172a;
+}
+
+.button-container {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+}
+
+.btn {
+    flex: 1;
+    text-decoration: none;
+    padding: 15px 30px;
+    font-size: 16px;
+    font-weight: 700;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.dashboard-button {
+    background-color: #334155;
+    color: #ffffff;
+    border: 1px solid #334155;
+}
+
+.dashboard-button:hover {
+    background-color: #1e293b;
+    border-color: #1e293b;
+    transform: translateY(-2px);
+}
+
+.retry-button {
+    background-color: #2d44c9;
+    color: #ffffff;
+    border: 1px solid #2d44c9;
+}
+
+.retry-button:hover {
+    background-color: #162894;
+    border-color: #162894;
+    transform: translateY(-2px);
+}
+
+.container.pass-card {
+    background-color: #dffae7;
+    border: 1px solid #a5f7c2; 
+    box-shadow: 0 10px 30px rgba(22, 163, 74, 0.12); 
+}
+
+.container.fail-card {
+    background-color: #f5dbdb;
+    border: 1px solid #fcb1b1;
+    box-shadow: 0 10px 30px rgba(220, 38, 38, 0.12);
+}
+
+.fail-card .retry-button {
+    background-color: #dc2626;
+    border-color: #dc2626;
+}
+
+.fail-card .retry-button:hover {
+    background-color: #b91c1c;
+    border-color: #b91c1c;
+}

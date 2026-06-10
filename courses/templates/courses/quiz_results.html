@@ -7,32 +7,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz Results</title>
 
-    <link rel="stylesheet" href="{% static 'css/quiz_results.css' %}">
+    <link rel="stylesheet" href="{% static 'stylequizresults.css' %}">
 </head>
 <body>
 
-    <div class="container">
-
+    <div class="container {% if score_percentage >= 50 %}pass-card{% else %}fail-card{% endif %}">
+        
         <h1 class="title">Quiz Complete!</h1>
 
         <p class="quiz-title">{{ quiz.title }}</p>
 
         <hr class="divider">
 
-        <h2 class="{% if score_percentage >= 50 %}pass-score{% else %}fail-score{% endif %}">
+        <h2 class="score-display {% if score_percentage >= 50 %}pass-score{% else %}fail-score{% endif %}">
             {{ score_percentage }}%
         </h2>
+
+        <p class="feedback-message">
+            {% if score_percentage >= 50 %}
+                Congratulations! You have passed the quiz!
+            {% else %}
+                Don't give up! Keep practicing and try again!
+            {% endif %}
+        </p>
 
         <p class="result-text">
             You answered <strong>{{ correct_answers }}</strong> out of <strong>{{ total_questions }}</strong> questions correctly.
         </p>
 
         <div class="button-container">
-            <a href="{% url 'dashboard' %}" class="btn dashboard-btn">
+            <a href="{% url 'dashboard' %}" class="btn dashboard-button">
                 Home
             </a>
 
-            <a href="{% url 'take_quiz' quiz.id %}" class="btn retry-btn">
+            <a href="{% url 'take_quiz' quiz.id %}" class="btn retry-button">
                 Retry Quiz
             </a>
         </div>
