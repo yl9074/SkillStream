@@ -154,8 +154,19 @@ def feedback(request):
 
 @login_required
 def courses(request):
+    subjects = Subject.objects.all()
     pathways = Pathway.objects.all()
-    return render(request, 'courses.html', {'pathways': pathways})
+    subject_id = request.GET.get('subject')
+    if subject_id:
+        pathways = pathways.filter(subject_id=subject_id)
+
+    context = {
+        'pathways': pathways,
+        'subjects': subjects,
+        'selected_subject': subject_id,
+    }
+
+    return render(request, 'courses.html', context)
 
 @login_required
 def mark_video_complete(request, video_id):

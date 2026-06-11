@@ -20,13 +20,28 @@
             <h1 class="hero-title">Choose Your Desired Course</h1>
             <p class="hero-subtitle">Expand your skills with our high-quality pathways.</p>
 
+            <div class="search-filter-container">
+
             <form method="GET" action="{% url 'search' %}" class="search-form">
                 <div class="search-bar">
                     <input type="text" name="q" placeholder="What do you want to learn today?" required>
                     <button type="submit" class="search-btn">Search</button>
                 </div>
             </form>
-        </div>
+
+            <form method="GET" action="{% url 'courses' %}">
+        <select name="subject" class="filter-select" onchange="this.form.submit()">
+            <option value="">All Subjects</option>
+            {% for subject in subjects %}
+                <option value="{{ subject.id }}"
+                    {% if subject.id|stringformat:"s" == selected_subject %}selected{% endif %}>
+                    {{ subject.title }}
+                </option>
+            {% endfor %}
+        </select>
+    </form>
+
+</div>
 
         <div class="course-grid">
             {% for pathway in pathways %}
