@@ -19,9 +19,32 @@
 
         <hr class="divider">
 
-        <h2 class="score-display {% if score_percentage >= 50 %}pass-score{% else %}fail-score{% endif %}">
-            {{ score_percentage }}%
-        </h2>
+        <div class="analytics-section">
+    
+            <div class="accuracy-container">
+                <h3 class="analytics-label">Accuracy</h3>
+        
+                <div class="split-progress-bar" style="--score: {{ score_percentage }};">
+                    <div class="progress-fill correct-fill">
+                        <span class="percentage-badge">{{ score_percentage }}%</span>
+                    </div>
+                    <div class="progress-fill incorrect-fill"></div>
+                </div>
+            </div>
+
+            <div class="stats-container">
+                <div class="stats-header">
+                    <h3 class="analytics-label">Performance Statistics</h3>
+                    <span class="total-questions-tag">{{ total_questions }} total questions</span>
+                </div>
+        
+                <div class="badges-row">
+                    <span class="stat-badge correct-badge">✓ {{ correct_answers }} Correct</span>
+                    <span class="stat-badge incorrect-badge">✕ {{ incorrect_answers }} Incorrect</span>
+                </div>
+            </div>
+
+        </div>
 
         <p class="feedback-message">
             {% if score_percentage >= 50 %}
