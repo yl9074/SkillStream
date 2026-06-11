@@ -49,6 +49,12 @@
     object-fit: contain;
 }
 
+.input-group .mail-icon {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+}
+
 .input-group input {
     flex: 1;
     margin: 0;

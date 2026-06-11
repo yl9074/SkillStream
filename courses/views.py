@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.db.models import Avg, Count
 from django.contrib.auth.decorators import user_passes_test
 from .models import Subject, Pathway, VideoLesson, UserProgress, Quiz, Question, QuizScore, UserProfile # import the new models here
+from .forms import CustomUserCreationForm
 
 # 1. Lobby: Display all available learning pathways
 @login_required
@@ -37,14 +38,15 @@ def subject_catalog(request):
 
 def register(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
             login(request, user)  # Log the user in after registration
             return redirect('dashboard')  # redirect to the dashboard after successful registration
     else:
-        form = UserCreationForm()
+        form = CustomUserCreationForm()
         form.fields['username'].widget.attrs.update({'placeholder': 'Username'})
+        form.fields['email'].widget.attrs.update({'placeholder': 'Email Address'})
         form.fields['password1'].widget.attrs.update({'placeholder': 'Password'})
         form.fields['password2'].widget.attrs.update({'placeholder': 'Confirm Password'})
     return render(request, 'register.html', {'form': form})

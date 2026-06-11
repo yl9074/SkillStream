@@ -21,6 +21,9 @@
                 <img src="{% static 'images/Lock.png' %}" alt="Lock Icon" class="lock-icon">
                 {{ form.password }}
             </div>
+            <div style="text-align: right; margin-bottom: 15px;">
+                <a href="{% url 'reset_password' %}" style="font-size: 14px; text-decoration: none;">Forgot Password?</a>
+            </div>
             <div id="loginButton">
                 <button type="submit">LOG IN</button>
             </div>
