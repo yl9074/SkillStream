@@ -72,16 +72,22 @@ def take_quiz(request, quiz_id):
             
             score_percentage = (correct_answers / total_questions) * 100
             
+            incorrect_answers = total_questions - correct_answers
+            
             QuizScore.objects.create(
                 user=request.user,
                 pathway=quiz.pathway,
                 score=score_percentage
             )
-        
+        else:
+            score_percentage = 0
+            incorrect_answers = 0
+
         context = {
                 'quiz': quiz,
                 'score_percentage': round(score_percentage, 1), #rounds to 1 decimal 
                 'correct_answers': correct_answers,
+                'incorrect_answers': incorrect_answers,
                 'total_questions': total_questions
             }
         return render(request, 'courses/quiz_results.html', context)
