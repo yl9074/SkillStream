@@ -1,61 +1,186 @@
+body {
+    background-color: #faf7f2; 
+    margin: 0; 
+    padding: 0;
+    font-family: 'Istok Web', sans-serif;
+    color: #333;
+}
+
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0px 20px;
-    font-family: Istok Web, sans-serif;
+    padding: 15px 40px;
+    background-color: #ffffff; 
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); 
+    position: sticky; 
+    top: 0;
+    z-index: 100;
+}
+
+.Website-title h2 {
+    margin: 0;
+    color: #222;
 }
 
 .dashboard-hrefs {
     display: flex;
     align-items: center;
-    gap: 50px;
-    margin-left: 550px;
+    gap: 40px;
 }
 
 .dashboard-hrefs a {
     text-decoration: none;
     color: black;
     font-size: 18px;
+    padding: 8px 16px; 
+    border-radius: 8px; 
+    transition: all 0.3s ease; 
+    font-weight: bold;
 }
 
 .dashboard-hrefs a:hover {
-    background-color: #c4c4c4;
-    padding: 20px 0px;
+    background-color: #f1e6fc; 
+    color: rgb(116, 18, 209); 
 }
 
 .profile {
-    width: 55px;
+    width: 45px; 
     border-radius: 50%;
     cursor: pointer;
+    border: 2px solid transparent;
+    transition: border 0.3s;
+}
+
+.profile:hover {
+    border-color: rgb(116, 18, 209); 
 }
 
 .dashboard-container {
     text-align: center;
-    margin-top: 100px;
-    font-family: Istok Web, sans-serif;
+    margin-top: 60px; 
+    padding: 0 20px;
 }
 
 .dashboard-container h1 {
-    font-size: 48px;
-    margin: 70px;
+    font-size: 42px;
+    margin: 20px 0;
+    color: #111;
 }
 
 .dashboard-container h2 {
-    color: rgb(116, 18, 209);
-    margin: 8px;
+    color: rgb(116, 18, 209); 
+    margin: 10px 0;
     font-size: 26px;
+    font-weight: bold;
 }
 
 .dashboard-container h4 {
     font-weight: lighter;
-    margin: auto;
+    color: #666; 
+    margin-top: 15px;
+    font-size: 18px;
 }
 
-.book {
-    width: 200px;
-    height: auto;
-    mix-blend-mode: multiply;
+.stats-grid {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    max-width: 800px;
+    margin: 40px auto;
+}
+
+.stat-card {
+    background: #ffffff;
+    flex: 1;
+    text-align: center;
+    padding: 20px 10px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+    transition: transform 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(116, 18, 209, 0.15);
+}
+
+.stat-card h3 {
+    margin: 0;
+    font-size: 32px;
+    color: rgb(116, 18, 209);
+}
+
+.stat-card p {
+    margin: 5px 0 0 0;
+    font-size: 14px;
+    color: #777;
+    font-weight: bold;
+}
+
+.continue-learning-section {
+    max-width: 800px;
+    margin: 0 auto 50px auto;
+}
+
+.section-title {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 15px;
+    padding-left: 5px;
+}
+
+.continue-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(to right, #ffffff, #fcfaff);
+    padding: 20px 30px;
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    border-left: 5px solid rgb(116, 18, 209);
+}
+
+.card-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.icon-box {
+    background: #f1e6fc;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+}
+
+.course-info h4 {
+    margin: 0 0 5px 0;
+    font-size: 18px;
+    color: #222;
+}
+
+.course-info p {
+    margin: 0;
+    font-size: 14px;
+    color: #666;
+}
+
+.resume-btn {
+    background-color: rgb(116, 18, 209);
+    color: white;
+    text-decoration: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.resume-btn:hover {
+    background-color: #5c0d8c; 
 }
 
 .dashboard-opinions {
@@ -63,36 +188,22 @@
     align-items: center;
     justify-content: center;
     gap: 40px;
-    max-width: 700px;
-    margin: 0 auto;
-    font-family: Istok Web, sans-serif;
-    font-size: 15px;
-    margin-top: 40px;
-    margin-left: 170px;
+    max-width: 800px;
+    margin: 50px auto; 
+    background: #ffffff;
+    padding: 30px 40px;
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06); 
 }
 
-body {
-    background-color: #faf7f2;
+.book {
+    width: 160px;
+    height: auto;
+    mix-blend-mode: multiply; 
 }
 
-.profile-header {
-    background: #ddd;
-    text-align: center;
-    padding: 20px;
-    font-size: 20px;
-}
-
-.back {
-    background: #ddd;
-    width: 100px;
-    padding: 10px;
-    margin: 20px;
-    text-align: center;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.profile-top img {
-    width: 80px;
-    border-radius: 50%;
+.opinion-text p {
+    line-height: 1.6; 
+    margin-bottom: 15px;
+    color: #444;
 }
