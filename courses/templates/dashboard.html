@@ -18,7 +18,13 @@
             <a href="{% url 'courses' %}">Courses</a>
             <a href="{% url 'feedback' %}">Feedback</a>
         </div>
-            <a href="{% url 'user_profile' %}"><img src="{% static 'images/Profile.png' %}" class="profile" alt="Profile Icon"></a>
+            <a href="{% url 'user_profile' %}">
+    {% if request.user.profile.profile_picture %}
+        <img src="{{ request.user.profile.profile_picture.url }}" class="profile" alt="Profile Icon">
+    {% else %}
+        <img src="{% static 'images/Profile.png' %}" class="profile" alt="Profile Icon">
+    {% endif %}
+</a>
         </nav>
     </header>
     <main>
