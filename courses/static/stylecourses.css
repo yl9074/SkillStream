@@ -1,160 +1,216 @@
-header {
-    width: 100%;
-    padding: 20px 40px;
-    box-sizing: border-box;
-    background-color: #f3f4f6;
-    justify-content: space-between;
-}
-
+/* --- 全局基础设置 --- */
 body {
+    background-color: #faf7f2; /* 保持与 Dashboard 一致的米白色背景 */
     margin: 0;
     padding: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-    background-color: #f3f4f6;
-    color: #1f1f1f;
+    font-family: 'Istok Web', sans-serif;
+    color: #333;
+}
+
+/* --- 顶部导航 --- */
+.header {
+    padding: 20px 40px;
+    background-color: transparent;
+}
+
+.back-btn {
+    text-decoration: none;
+    color: #666;
+    font-size: 16px;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.back-btn:hover {
+    color: rgb(116, 18, 209);
+}
+
+/* --- 主容器 --- */
+.courses-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px 60px 20px;
+}
+
+/* --- 头部 Hero 区域 (含搜索) --- */
+.hero-section {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.hero-title {
+    font-size: 42px;
+    color: #111;
+    margin-bottom: 10px;
+}
+
+.hero-subtitle {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+/* 搜索栏样式 */
+.search-form {
+    display: flex;
     justify-content: center;
 }
 
-.back-button {
-    background-color: #e2e8f0;
+.search-bar {
+    display: flex;
+    width: 100%;
+    max-width: 600px;
+    background: #fff;
+    border-radius: 50px;
+    padding: 8px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+    border: 2px solid transparent;
+    transition: border-color 0.3s ease;
+}
+
+.search-bar:focus-within {
+    border-color: rgb(116, 18, 209);
+}
+
+.search-bar input {
+    flex: 1;
     border: none;
-    border-radius: 8px;
-    padding: 10px 20px;
-    font-size: 14px;
+    outline: none;
+    padding: 15px 20px;
+    font-size: 16px;
+    border-radius: 50px;
+    background: transparent;
+}
+
+.search-btn {
+    background-color: rgb(116, 18, 209);
+    color: white;
+    border: none;
+    padding: 0 30px;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: bold;
     cursor: pointer;
-    transition: background-color 0.2s ease;
+    transition: background-color 0.3s ease;
 }
 
-.back-button:hover {
-    background-color: #cbd5e1;
+.search-btn:hover {
+    background-color: #5c0d8c;
 }
 
-.dashboard-wrapper {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 40px 20px;
-    box-sizing: border-box;
-}
-
-.section-title {
-    font-size: 30px;
-    font-weight: 700;
-    margin-bottom: 30px;
-    color: #0f172a;
-}
-
+/* --- 课程卡片网格 --- */
 .course-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 50px;
-    width: 100%;
+    /* 响应式魔法：屏幕宽就排多列，屏幕窄就自动变少列 */
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
 }
 
+/* 卡片本体 */
 .course-card {
-    background-color: #ffffff;
+    background: #fff;
     border-radius: 16px;
-    border: 1px solid #e2e8f0;
     overflow: hidden;
     text-decoration: none;
     color: inherit;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     display: flex;
     flex-direction: column;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .course-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(116, 18, 209, 0.15);
 }
 
+/* 卡片封面图区域 */
 .card-banner {
-    width: 100%;
-    height: 200px;
-    overflow: hidden;
-    background-color: #e2e8f0;
     position: relative;
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
 }
 
 .card-banner img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.5s ease;
 }
 
+.course-card:hover .card-banner img {
+    transform: scale(1.05);
+}
+
+/* 类别徽章 */
+.course-badge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: rgba(255, 255, 255, 0.9);
+    color: rgb(116, 18, 209);
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+/* 卡片文字内容 */
 .card-body {
     padding: 20px;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-    background: linear-gradient(168deg, rgb(221, 221, 221) 15.45%, rgb(110, 136, 161) 100.00%);
-}
-
-.provider-info {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 8px;
-}
-
-.course-genre {
-    font-size: 15px;
-    color: #475569;
-    font-weight: 500;
 }
 
 .course-name {
-    font-size: 18px;
-    font-weight: 600;
-    margin: 0 0 16px 0;
+    margin: 0 0 20px 0;
+    font-size: 20px;
+    color: #222;
     line-height: 1.4;
-    color: #0f172a;
-    flex-grow: 1;
 }
 
-.search-form-container {
-    width: 100%;
-    margin-bottom: 35px;
+.card-footer {
+    margin-top: auto;
     display: flex;
-    justify-content: center;
-}
-
-.search-input-wrapper {
-    display: flex;
-    width: 100%;
-    max-width: 500px;
-    background-color: #ffffff;
-    border: 1px solid #cbd5e1;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    transition: border-color 0.2s, box-shadow 0.2s;
-}
-
-.search-input-wrapper:focus-within {
-    border-color: #1f36bc;
-    box-shadow: 0 0 0 3px rgba(31, 54, 188, 0.15);
-}
-
-.search-input-wrapper input[type="text"] {
-    flex-grow: 1;
-    border: none;
-    padding: 16px 20px;
-    font-size: 18px;
-    outline: none;
-    background: transparent;
-}
-
-.search-submit-button {
-    background-color: #2d44c9;
-    color: #ffffff;
-    border: none;
-    padding: 0 22px;
-    font-size: 18px;
+    justify-content: space-between;
+    align-items: center;
     font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.15s ease;
+    color: rgb(116, 18, 209);
+    font-size: 15px;
 }
 
-.search-submit-button:hover {
-    background-color: #162894;
+.arrow {
+    transition: transform 0.3s ease;
+}
+
+.course-card:hover .arrow {
+    transform: translateX(5px);
+}
+
+/* --- 空状态 (没课程时显示) --- */
+.empty-state {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 60px 0;
+}
+
+.empty-img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+    filter: grayscale(80%);
+}
+
+.empty-state h3 {
+    font-size: 24px;
+    color: #444;
+    margin-bottom: 10px;
+}
+
+.empty-state p {
+    color: #888;
 }

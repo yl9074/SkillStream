@@ -4,46 +4,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Courses</title>
+    <title>Explore Courses - SkillStream</title>
     <link rel="stylesheet" href="{% static 'stylecourses.css' %}">
 </head>
 <body>
     <header class="header">
-        <a href="{% url 'dashboard' %}"><button class="back-button">Back</button></a>
+        <a href="{% url 'dashboard' %}" class="back-btn">
+            &larr; Back to Dashboard
+        </a>
     </header>
-    <div class="dashboard-wrapper">
-        <h1 class="section-title">Choose Your Desired Course</h1>
 
-        <form method="GET" action="{% url 'search' %}" class="search-form-container">
-            <div class="search-input-wrapper">
-                <input type="text" name="q" placeholder="Search for Courses" required>
-                <button type="submit" class="search-submit-button">Search</button>
-            </div>
-        </form>
+    <div class="courses-container">
+        
+        <div class="hero-section">
+            <h1 class="hero-title">Choose Your Desired Course</h1>
+            <p class="hero-subtitle">Expand your skills with our high-quality pathways.</p>
+
+            <form method="GET" action="{% url 'search' %}" class="search-form">
+                <div class="search-bar">
+                    <input type="text" name="q" placeholder="What do you want to learn today?" required>
+                    <button type="submit" class="search-btn">Search</button>
+                </div>
+            </form>
+        </div>
 
         <div class="course-grid">
             {% for pathway in pathways %}
             <a href="{% url 'pathway_detail' pathway.id %}" class="course-card">
                 
                 <div class="card-banner">
-                    <img src="{% static 'images/Book.png' %}" alt="Course thumbnail">
+                    {% if pathway.cover_image %}
+                        <img src="{{ pathway.cover_image.url }}" alt="{{ pathway.title }} Thumbnail">
+                    {% else %}
+                        <img src="{% static 'images/default_course_icon.jpg' %}" alt="Default Thumbnail">
+                    {% endif %}
+                    
+                    <span class="course-badge">{{ pathway.subject.title }}</span>
                 </div>
                 
                 <div class="card-body">
-                    <div class="provider-info">
-                        <span class="course-genre">{{ pathway.subject.title }}</span>
-                    </div>
                     <h3 class="course-name">{{ pathway.title }}</h3>
+                    <div class="card-footer">
+                        <span class="start-text">Start Learning </span>
+                        <span class="arrow">&rarr;</span>
+                    </div>
                 </div>
             </a>
             
             {% empty %}
-                <p style="grid-column: 1 / -1; text-align: center; color: gray;">
-                    No courses available right now. Tell the admin to add some!
-                </p>
+                <div class="empty-state">
+                    <img src="{% static 'images/default_course_icon.png' %}" alt="No Courses" class="empty-img">
+                    <h3>No courses found</h3>
+                    <p>Tell the admin to add some exciting new content!</p>
+                </div>
             {% endfor %}
-            
         </div>
+        
     </div>
 </body>
 </html>

@@ -51,7 +51,23 @@ def register(request):
 
 @login_required
 def dashboard_view(request):
-    return render(request, 'dashboard.html')
+    user = request.user
+
+    videos_watched = UserProgress.objects.filter(user=user, is_completed=True).count()
+
+    score_data = QuizScore.objects.filter(user=user).aggregate(Avg('score'))
+    raw_avg = score_data['score__avg']
+    avg_score = round(raw_avg, 1) if raw_avg else 0 
+
+    last_progress = UserProgress.objects.filter(user=user).order_by('-completion_date').first()
+
+    context = {
+        'videos_watched': videos_watched,
+        'avg_score': avg_score,
+        'last_progress': last_progress,
+    }
+
+    return render(request, 'dashboard.html', context)
 
 @login_required
 def take_quiz(request, quiz_id):

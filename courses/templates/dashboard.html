@@ -55,10 +55,15 @@
                         {% endif %}
                     </div>
                 </div>
+                
                 <div class="card-right">
-                    <a href="#" class="resume-btn">Resume Course</a>
+                    {% if last_progress %}
+                        <a href="{% url 'pathway_detail' last_progress.video.pathway.id %}" class="resume-btn">Resume Course</a>
+                    {% else %}
+                        <a href="{% url 'courses' %}" class="resume-btn">Browse Courses</a>
+                    {% endif %}
                 </div>
-            </div>
+                </div>
         </div>
 
         <div class="dashboard-opinions">

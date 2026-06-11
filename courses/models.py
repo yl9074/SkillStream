@@ -14,6 +14,7 @@ class Subject(models.Model):
 class Pathway(models.Model):
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE, related_name='pathways')
     title = models.CharField(max_length=200)
+    cover_image = models.ImageField(upload_to='course_covers/', null=True, blank=True)
 
     def __str__(self):
         return f"{self.subject.title} - {self.title}"
