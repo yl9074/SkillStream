@@ -28,6 +28,39 @@
             <h2>Your Path to Brilliance</h2>
             <h4>SkillStream Helps you Study More Efficiently and Effectively</h4>
         </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3>{{ videos_watched }}</h3>
+                <p>Videos Watched</p>
+            </div>
+            <div class="stat-card">
+                <h3>{{ avg_score }}%</h3>
+                <p>Avg Score</p>
+            </div>
+        </div>
+
+        <div class="continue-learning-section">
+            <h3 class="section-title">Jump Back In</h3>
+            <div class="continue-card">
+                <div class="card-left">
+                    <div class="icon-box"></div>
+                    <div class="course-info">
+                        {% if last_progress %}
+                            <h4>{{ last_progress.video.pathway.title }}</h4>
+                            <p>Lesson {{ last_progress.video.sequence_order }}</p>
+                        {% else %}
+                            <h4>No courses started yet</h4>
+                            <p>Go explore the library!</p>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="card-right">
+                    <a href="#" class="resume-btn">Resume Course</a>
+                </div>
+            </div>
+        </div>
+
         <div class="dashboard-opinions">
             <img src="{% static 'images/Book.png' %}" class="book" alt="Person With Book Image">
             <div class="opinion-text">
