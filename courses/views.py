@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.db.models import Avg, Count
 from django.contrib.auth.decorators import user_passes_test
-from .models import Subject, Pathway, VideoLesson, UserProgress, Quiz, Question, QuizScore # import the new models here
+from .models import Subject, Pathway, VideoLesson, UserProgress, Quiz, Question, QuizScore, UserProfile # import the new models here
 
 # 1. Lobby: Display all available learning pathways
 @login_required
@@ -108,14 +108,22 @@ def search_courses(request):
 
 @login_required
 def user_profile(request):
+    profile, created = UserProfile.objects.get_or_create(user=request.user)
+
+    if request.method == 'POST' and request.FILES.get('profile_pic'):
+        profile.profile_picture = request.FILES['profile_pic']
+        profile.save()
+        return redirect('user_profile')
+
     progress_records = UserProgress.objects.filter(user=request.user)
     
     context = {
-        'progress_list': progress_records
+        'progress_list': progress_records,
+        'profile': profile,
     }
     
     return render(request, 'profile.html', context)
-
+    
 @login_required
 def feedback(request):
     return render(request, 'feedback.html')
