@@ -58,7 +58,7 @@ body {
 
 .search-bar {
     display: flex;
-    width: 100%;
+    width: 700px;
     max-width: 600px;
     background: #fff;
     border-radius: 50px;
@@ -104,6 +104,7 @@ body {
     /* 响应式魔法：屏幕宽就排多列，屏幕窄就自动变少列 */
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 30px;
+    margin-top: 40px;
 }
 
 /* 卡片本体 */
@@ -213,4 +214,25 @@ body {
 
 .empty-state p {
     color: #888;
+}
+
+.search-filter-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.filter-select {
+    padding: 15px 25px;
+    border-radius: 50px;
+    background-color: rgb(116, 18, 209);
+    color: white;
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    outline: none;
+    min-width: 180px;
 }
