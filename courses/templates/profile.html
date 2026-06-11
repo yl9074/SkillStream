@@ -19,14 +19,24 @@
         <h1>Profile</h1>
         </div>
 
-        <div class="card profile-card">
+        <div class="card profile-card"> 
+            
             <div class="profile-header">
                 <div class="avatar">
-                    <img src="{% static 'images/Profile.png' %}" id="profile-image" alt="Profile Avatar">
+                    {% if profile.profile_picture %}
+                        <img src="{{ profile.profile_picture.url }}" id="profile-image" alt="Profile Avatar">
+                    {% else %}
+                        <img src="{% static 'images/Profile.png' %}" id="profile-image" alt="Profile Avatar">
+                    {% endif %}
                 </div>
-                <button class="change-profile-button" id="upload-button">Change profile</button>
-                <input type="file" id="file-input" accept="image/*" style="display: none;">
+                
+                <form method="POST" enctype="multipart/form-data" style="display: flex; flex-direction: column; gap: 10px; margin-left: 20px;">
+                    {% csrf_token %}
+                    <input type="file" name="profile_pic" accept="image/*" required>
+                    <button type="submit" class="change-profile-button">Upload & Save</button>
+                </form>
             </div>
+            
             <div class="profile-info">
                 <h2>{{ request.user.username }}</h2>
                 <p class="role">
@@ -41,60 +51,39 @@
                     <button type="button" class="logout-button" id="logout-button">Log Out</button>
                 </form>
             </div>
+
+        </div> <div class="card metrics-card">
+            <h2>Overall Learning Metrics</h2>
+            
+            {% for progress in progress_list %}
+            <div class="metric-row">
+                <span class="course-label">{{ progress.video.pathway.title }} - Lesson {{ progress.video.sequence_order }}</span>
+                
+                <div class="progress-bar">
+                    {% if progress.is_completed %}
+                        <div class="progress" style="width: 100%; background-color: #4CAF50;">100%</div>
+                    {% else %}
+                        <div class="progress" style="width: 50%; background-color: #FF9800;">50%</div>
+                    {% endif %}
+                </div>
+            </div>
+
+            {% empty %}
+            <div class="metric-row">
+                <p style="color: #aaa; margin-top: 10px;">You haven't started any courses yet. Go explore!</p>
+            </div>
+            {% endfor %}
         </div>
-
-        <div class="card metrics-card">
-    <h2>Overall Learning Metrics</h2>
-    
-    {% for progress in progress_list %}
-    <div class="metric-row">
-        <span class="course-label">{{ progress.video.pathway.title }} - Lesson {{ progress.video.sequence_order }}</span>
-        
-        <div class="progress-bar">
-            {% if progress.is_completed %}
-                <div class="progress" style="width: 100%; background-color: #4CAF50;">100%</div>
-            {% else %}
-                <div class="progress" style="width: 50%; background-color: #FF9800;">50%</div>
-            {% endif %}
-        </div>
-    </div>
-
-    {% empty %}
-    <div class="metric-row">
-        <p style="color: #aaa; margin-top: 10px;">You haven't started any courses yet. Go explore!</p>
-    </div>
-    {% endfor %}
-</div>
-
-    <script>
-
-    const uploadBtn = document.getElementById('upload-button');
-    const fileInput = document.getElementById('file-input');
-    const profileImg = document.getElementById('profile-image');
+    </div> <script>
     const logoutBtn = document.getElementById('logout-button');
     const logoutForm = document.getElementById('logout-form');
 
-
-    uploadBtn.addEventListener('click', function() {
-        fileInput.click();
-    });
-
-    fileInput.addEventListener('change', function() {
-        const file = this.files[0];
-
-        if (file) {
-            const objectURL = URL.createObjectURL(file);
-            
-            profileImg.src = objectURL;
-        }
-    });
-
     logoutBtn.addEventListener('click', function() {
-    const userConfirmed = confirm("Are you sure you want to log out?");
-    
-    if (userConfirmed) {
-        logoutForm.submit();
-    }
+        const userConfirmed = confirm("Are you sure you want to log out?");
+        
+        if (userConfirmed) {
+            logoutForm.submit();
+        }
     });
     </script>
 

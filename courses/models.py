@@ -107,3 +107,11 @@ class QuizScore(models.Model):
 
     def __str__(self):
         return f"{self.user.username} - {self.pathway.title} - {self.score}%"
+    
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
+    
+    profile_picture = models.ImageField(upload_to='profile_pics/', null=True, blank=True)
+
+    def __str__(self):
+        return f"{self.user.username}'s Profile"
