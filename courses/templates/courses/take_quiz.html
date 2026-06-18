@@ -3,58 +3,152 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ quiz.title }} - SkillStream</title>
     <link rel="stylesheet" href="{% static 'stylequiz.css' %}">
 </head>
 <body class="quiz-body">
 
-    <div class="quiz-container">
-        <h1 class="quiz-title">{{ quiz.title }}</h1>
-        <p class="quiz-subtitle">Pathway: {{ quiz.pathway.title }}</p>
-        <hr class="quiz-divider">
+    <!-- Main Split Layout Wrapper Container -->
+    <div class="quiz-layout-wrapper">
         
-        <form method="POST">
-            {% csrf_token %}
+        <!-- Left Column: The Main Quiz Form -->
+        <div class="quiz-container">
+            <h1 class="quiz-title">{{ quiz.title }}</h1>
+            <p class="quiz-subtitle">Pathway: {{ quiz.pathway.title }}</p>
+            <hr class="quiz-divider">
             
-            {% for question in questions %}
-                <div class="question-card">
-                    <h3 class="question-text">{{ forloop.counter }}. {{ question.question_text }}</h3>
-                    
-                    {% if question.option_a %}
-                        <label class="quiz-option-bar">
-                            <input type="radio" name="question_{{ question.id }}" value="{{ question.option_a }}" required> 
-                            <span class="option-text">{{ question.option_a }}</span>
-                        </label>
-                    {% endif %}
+            <form method="POST" id="quizForm">
+                {% csrf_token %}
+                
+                {% for question in questions %}
+                    <!-- data-q-id attribute to track each card mapping index -->
+                    <div class="question-card" data-q-id="{{ forloop.counter }}">
+                        <h3 class="question-text">{{ forloop.counter }}. {{ question.question_text }}</h3>
+                        
+                        {% if question.option_a %}
+                            <label class="quiz-option-bar">
+                                <input type="radio" name="question_{{ question.id }}" value="{{ question.option_a }}" required> 
+                                <span class="option-text">{{ question.option_a }}</span>
+                            </label>
+                        {% endif %}
 
-                    {% if question.option_b %}
-                        <label class="quiz-option-bar">
-                            <input type="radio" name="question_{{ question.id }}" value="{{ question.option_b }}" required> 
-                            <span class="option-text">{{ question.option_b }}</span>
-                        </label>
-                    {% endif %}
+                        {% if question.option_b %}
+                            <label class="quiz-option-bar">
+                                <input type="radio" name="question_{{ question.id }}" value="{{ question.option_b }}" required> 
+                                <span class="option-text">{{ question.option_b }}</span>
+                            </label>
+                        {% endif %}
 
-                    {% if question.option_c %}
-                        <label class="quiz-option-bar">
-                            <input type="radio" name="question_{{ question.id }}" value="{{ question.option_c }}" required> 
-                            <span class="option-text">{{ question.option_c }}</span>
-                        </label>
-                    {% endif %}
+                        {% if question.option_c %}
+                            <label class="quiz-option-bar">
+                                <input type="radio" name="question_{{ question.id }}" value="{{ question.option_c }}" required> 
+                                <span class="option-text">{{ question.option_c }}</span>
+                            </label>
+                        {% endif %}
 
-                    {% if question.option_d %}
-                        <label class="quiz-option-bar">
-                            <input type="radio" name="question_{{ question.id }}" value="{{ question.option_d }}" required> 
-                            <span class="option-text">{{ question.option_d }}</span>
-                        </label>
-                    {% endif %}
+                        {% if question.option_d %}
+                            <label class="quiz-option-bar">
+                                <input type="radio" name="question_{{ question.id }}" value="{{ question.option_d }}" required> 
+                                <span class="option-text">{{ question.option_d }}</span>
+                            </label>
+                        {% endif %}
+                    </div>
+                {% empty %}
+                    <p class="empty-message">This quiz doesn't have any questions yet! Tell the Admin to add some.</p>
+                {% endfor %}
+                
+                <button type="submit" class="submit-button">Submit Answers</button>
+            </form>
+        </div>
+
+        <!-- Right Column Sticky Side Tracker Panel -->
+        <div class="quiz-sidebar">
+            <div class="sticky-progress-card">
+                <h2 class="sidebar-heading">Quiz Progress</h2>
+                
+                <!-- Linear percentage completion tracker bar -->
+                <div class="sidebar-progress-track">
+                    <div class="sidebar-progress-fill" id="progressBarFill" style="width: 0%;"></div>
                 </div>
-            {% empty %}
-                <p class="empty-message">This quiz doesn't have any questions yet! Tell the Admin to add some.</p>
-            {% endfor %}
-            
-            <button type="submit" class="submit-button">Submit Answers</button>
-        </form>
+                
+                <p class="progress-ratio-text">
+                    Answered: <strong id="answeredCount">0</strong> / {{ questions.count }}
+                </p>
+                
+                <hr class="sidebar-divider">
+                
+                <!-- Grid of individual clickable question navigation bubbles -->
+                <div class="question-status-grid">
+                    {% for question in questions %}
+                        <div class="status-bubble" id="bubble-{{ forloop.counter }}" data-target-id="{{ forloop.counter }}">
+                            {{ forloop.counter }}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
     </div>
+
+    <!-- Dynamic Selection Event Handler Script -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const form = document.getElementById("quizForm");
+            const totalQuestions = parseInt("{{ questions.count }}");
+            
+            if (totalQuestions === 0) return;
+
+            function updateProgress() {
+                // Group radio inputs by unique element names to isolate completed questions
+                const answeredNames = new Set();
+                const selectedRadios = form.querySelectorAll('input[type="radio"]:checked');
+                
+                selectedRadios.forEach(radio => {
+                    answeredNames.add(radio.name);
+                });
+
+                const answeredCount = answeredNames.size;
+                const percentage = (answeredCount / totalQuestions) * 100;
+
+                // 1. Update the linear graphical bar width fill metric
+                document.getElementById("progressBarFill").style.width = percentage + "%";
+                
+                // 2. Update the descriptive tracking ratio numeric text
+                document.getElementById("answeredCount").textContent = answeredCount;
+
+                // 3. Highlight each mapped grid question card bubble item status
+                const questionCards = form.querySelectorAll('.question-card');
+                questionCards.forEach(card => {
+                    const qId = card.getAttribute('data-q-id');
+                    const isChecked = card.querySelector('input[type="radio"]:checked');
+                    const bubble = document.getElementById(`bubble-${qId}`);
+                    
+                    if (bubble) {
+                        if (isChecked) {
+                            bubble.classList.add('completed');
+                        } else {
+                            bubble.classList.remove('completed');
+                        }
+                    }
+                });
+            }
+
+            // Bind update events to all inputs across the parent container
+            form.addEventListener("change", updateProgress);
+            // Clean Event Listener to handle scrolling without causing editor parsing warnings
+            document.querySelectorAll('.status-bubble').forEach(bubble => {
+                bubble.addEventListener('click', function() {
+                    const targetId = this.getAttribute('data-target-id');
+                    const targetCard = document.querySelector(`.question-card[data-q-id="${targetId}"]`);
+                    if (targetCard) {
+                        targetCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                });
+            });
+        });
+
+    </script>
 
 </body>
 </html>
