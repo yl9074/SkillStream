@@ -92,11 +92,16 @@ def take_quiz(request, quiz_id):
             
             incorrect_answers = total_questions - correct_answers
             
-            QuizScore.objects.create(
+            quiz_record, created = QuizScore.objects.get_or_create(
                 user=request.user,
-                pathway=quiz.pathway,
-                score=score_percentage
+                quiz=quiz,
+                defaults={'score': score_percentage} 
             )
+
+            if not created and score_percentage > quiz_record.score:
+                quiz_record.score = score_percentage
+                quiz_record.save()
+
         else:
             score_percentage = 0
             incorrect_answers = 0

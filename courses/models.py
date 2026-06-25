@@ -67,9 +67,12 @@ class Quiz(models.Model):
     pathway = models.ForeignKey(Pathway, on_delete=models.CASCADE, related_name='quizzes')
     title = models.CharField(max_length=200)
 
-    def __str__(self):
-        return f"Quiz: {self.title}"
+    video = models.ForeignKey(VideoLesson, on_delete=models.CASCADE, related_name='quizzes', null=True, blank=True)
 
+    def __str__(self):
+        if self.video:
+            return f"{self.title} (for {self.video.sequence_order})"
+        return f"{self.title} (for {self.pathway.title})"
 # 5. Question (Individual questions belonging to a quiz, including multiple-choice options)
 class Question(models.Model):
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, related_name='questions')
@@ -98,7 +101,7 @@ class UserProgress(models.Model):
     
 class QuizScore(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    pathway = models.ForeignKey(Pathway, on_delete=models.CASCADE)
+    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, null=True)
     score = models.DecimalField(max_digits=5, decimal_places=2) # Example: 85.50
     date_taken = models.DateTimeField(auto_now_add=True)
 
@@ -107,7 +110,9 @@ class QuizScore(models.Model):
         ordering = ['-date_taken'] 
 
     def __str__(self):
-        return f"{self.user.username} - {self.pathway.title} - {self.score}%"
+        if self.quiz:
+            return f"{self.user.username} - {self.quiz.title} - {self.score}%"
+        return f"{self.user.username} - Unknown Quiz - {self.score}%"
     
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
