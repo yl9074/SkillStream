@@ -43,8 +43,8 @@ class QuestionAdmin(admin.ModelAdmin):
 # 4. Register QuizScore (to easily track students' exam results)
 @admin.register(QuizScore)
 class QuizScoreAdmin(admin.ModelAdmin):
-    list_display = ('user', 'pathway', 'score', 'date_taken')
-    list_filter = ('pathway', 'date_taken')
+    list_display = ('user', 'quiz', 'score', 'date_taken')
+    list_filter = ('quiz', 'date_taken')
     
 # 5. Register UserProgress (if not already registered previously)
 @admin.register(UserProgress)
